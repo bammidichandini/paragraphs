@@ -5,6 +5,6 @@ from core_app.views import create_paragraph, \
     get_paragraph
 
 urlpatterns = [
-    path('/paragraph/add', csrf_exempt(create_paragraph.create_paragraph), name='create_paragraph'),
-    path('/paragraph/get', csrf_exempt(get_paragraph.get_paragraph), name='get_paragraph'),
+    path('/paragraph/add', create_paragraph.CreateParagraph.as_view(), name='create_paragraph'),
+    path('/paragraph/get', get_paragraph.GetParagraph.as_view(), name='get_paragraph'),
 ]

@@ -9,7 +9,14 @@ pip install -r requirement.txt
 python manage.py runsever
 ```
 
+# create user using command
+```
+python manage.py createsuperuser
+```
+
 # run jupyter and test APIs
+
+run below command and open api_testing.ipynb
 ```
 jupyter notebook
 ```

@@ -1,20 +1,21 @@
 import json
 
-from django.core.exceptions import BadRequest
-from django.http import HttpResponse
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
 
-def get_paragraph(request):
-    from core_app.interactor.get_paragraph import GetParagraph
-    from core_app.storage.paragraphs import ParagraphStorage
+class GetParagraph(APIView):
+    permission_classes = (IsAuthenticated,)
 
-    if request.method != 'POST':
-        raise BadRequest()
+    def post(self, request):
+        from core_app.interactor.get_paragraph import GetParagraph
+        from core_app.storage.paragraphs import ParagraphStorage
 
-    word = json.loads(request.body)
+        word = json.loads(request.body)
 
-    interactor = GetParagraph(storage=ParagraphStorage())
+        interactor = GetParagraph(storage=ParagraphStorage())
 
-    response = interactor.get_paragraph(word=word)
+        response = interactor.get_paragraph(word=word)
 
-    return HttpResponse(json.dumps(response))
+        return Response(json.dumps(response))
